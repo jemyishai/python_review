@@ -19,40 +19,35 @@ class BinaryTree(object):
 
     def search(self, find_val):
         struggle_train = self.preorder_search(self.root,find_val)
-        print struggle_train
-        # if output == True:
-        #     return True
-        # else:
-        #     return False
+        if struggle_train != True:
+            return False
+        else:
+            return struggle_train
 
     def print_tree(self):
         output_string = ''
         output_array = self.preorder_print(self.root,[])
         for item in output_array:
             output_string = output_string + str(item) + "-"
-        print output_string[:-1]
+        return output_string[:-1]
 
 
     def preorder_search(self, start, find_val):
         if start.left == None and start.right == None:
-            # print start.value, find_val
             if start.value == find_val:
-                print 'made it here'
-                return 58
+                return True
         elif start.left != None:
-            # print start.value
             if start.value == find_val:
                 return True
             else:
-                self.preorder_search(start.left, find_val)
-                self.preorder_search(start.right,find_val)
+                return self.preorder_search(start.left, find_val)
+                return self.preorder_search(start.right,find_val)
         elif start.right != None:
             if start.value == find_val:
                 return True
             else:
-                self.preorder_search(start.right, find_val)
-                self.preorder_search(start.left,find_val)
-
+                return self.preorder_search(start.right,find_val)
+                return self.preorder_search(start.left,find_val)
 
     def preorder_print(self, start, traversal):
         node = start
