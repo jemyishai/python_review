@@ -36,17 +36,14 @@ class BST(object):
             elif new_val < value:
                 prev_node = node
                 node = node.left
-        # print value, new_val
-        # print tree.root.left == node
         # the connection between this node variable and the insert method of the tree instance is messed up
         new = Node(new_val)
-        node = new
-        # if prev_node.value < new_val:
-        #     prev_node.right = new
-        # else:
-        #     prev_node.left = new
-        # print node.value
-        # print tree.root.left.value
+        # node = new
+        if prev_node.value < new_val:
+            prev_node.right = new
+        else:
+            prev_node.left = new
+        return tree
 
     def add_node(self, new_val, node, direction):
     #   print tree.root.value
@@ -60,18 +57,12 @@ tree = BST(4)
 
 # Insert elements
 tree.insert(2)
-# tree.insert(1)
-
-# tree.insert(3)
-# tree.insert(5)
-print tree.root.value
-print tree.root.left
-# print tree.root.left.left.value
-# print tree.root.left.right.value
-# print tree.root.right.value
+tree.insert(1)
+tree.insert(3)
+tree.insert(5)
 
 # Check search
 # Should be True
-# print tree.search(4)
+print tree.search(4)
 # Should be False
-# print tree.search(6)
+print tree.search(6)
