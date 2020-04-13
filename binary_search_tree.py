@@ -33,7 +33,6 @@ class BST(object):
     #         elif new_val < value:
     #             prev_node = node
     #             node = node.left
-    #     # the connection between this node variable and the insert method of the tree instance is messed up
     #     new = Node(new_val)
     #     # node = new
     #     if prev_node.value < new_val:
@@ -82,6 +81,17 @@ class BST(object):
             return False
         else:
             return self.search_help(node.left,find_val) or self.search_help(node.right,find_val)
+
+    #alternative solution to search
+    def search_helper(self, current, find_val):
+        if current:
+            if current.value == find_val:
+                return True
+            elif current.value < find_val:
+                return self.search_helper(current.right, find_val)
+            else:
+                return self.search_helper(current.left, find_val)
+        return False
 
 # Set up tree
 tree = BST(4)
