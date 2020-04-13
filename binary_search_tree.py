@@ -10,11 +10,6 @@
 
 #Iterative implementations require pointers to current and previous nodes
 
-        4
-      /   \
-     2      5
-    / \
-   1   3
 class Node(object):
     def __init__(self, value):
         self.value = value
@@ -25,30 +20,42 @@ class BST(object):
     def __init__(self, root):
         self.root = Node(root)
 
-    def insert(self, new_val):
-        node = self.root
-        prev_node = self.root
-        # chain we need : tree.root.left.right
-        while node:
-            value = node.value
-            if new_val > value:
-                prev_node = node
-                node = node.right
-            elif new_val < value:
-                prev_node = node
-                node = node.left
-        # the connection between this node variable and the insert method of the tree instance is messed up
-        new = Node(new_val)
-        # node = new
-        if prev_node.value < new_val:
-            prev_node.right = new
-        else:
-            prev_node.left = new
-        return tree
+    #iterative solution
+    # def insert(self, new_val):
+    #     node = self.root
+    #     prev_node = self.root
+    #     # chain we need : tree.root.left.right
+    #     while node:
+    #         value = node.value
+    #         if new_val > value:
+    #             prev_node = node
+    #             node = node.right
+    #         elif new_val < value:
+    #             prev_node = node
+    #             node = node.left
+    #     # the connection between this node variable and the insert method of the tree instance is messed up
+    #     new = Node(new_val)
+    #     # node = new
+    #     if prev_node.value < new_val:
+    #         prev_node.right = new
+    #     else:
+    #         prev_node.left = new
+    #     return tree
 
-    def add_node(self, new_val, node, direction):
-    #   print tree.root.value
-       node[direction] = Node(new_val)
+    def insert(self, new_val):
+        return self.insert_helper(self.root,new_val)
+
+    def insert_helper(self,node,new_val):
+        if node.value > new_val:
+            if node.left != None:
+                self.insert_helper(node.left,new_val)
+            else:
+                node.left = Node(new_val)
+        elif node.value < new_val:
+            if node.right != None:
+                self.insert_helper(node.right, new_val)
+            else:
+                node.right = Node(new_val)
 
     #iterative solution
     # def search(self, find_val):
