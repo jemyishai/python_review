@@ -1,19 +1,20 @@
-Binary Search Tree:
+# Binary Search Tree:
 
-Search is the height of the Tree - O (log(n))
-Insertion - same process - eventually hit open spot in tree
+# Search is the height of the Tree - O (log(n))
+# Insertion - same process - eventually hit open spot in tree
 
-Unbalanced tree - distribution is skewed
+# Unbalanced tree - distribution is skewed
 
-Worst Case scenario for BST -
-Search, Insertion, Deletion are all linear time O(n)
+# Worst Case scenario for BST -
+# Search, Insertion, Deletion are all linear time O(n)
+
+#Iterative implementations require pointers to current and previous nodes
 
         4
       /   \
      2      5
     / \
    1   3
-
 class Node(object):
     def __init__(self, value):
         self.value = value
@@ -49,8 +50,31 @@ class BST(object):
     #   print tree.root.value
        node[direction] = Node(new_val)
 
+    #iterative solution
+    # def search(self, find_val):
+    #     node = self.root
+    #     previous_node = self.root
+    #     while node:
+    #         if node.value == find_val:
+    #             return True
+    #         elif node.value < find_val:
+    #             previous_node = node
+    #             node = node.right
+    #         elif node.value > find_val:
+    #             previous_node = node
+    #             node = node.left
+    #     return False
+
     def search(self, find_val):
-        return False
+        return self.search_help(self.root,find_val)
+
+    def search_help(self,node,find_val):
+        if node.value == find_val:
+            return True
+        elif node.left == None and node.right == None:
+            return False
+        else:
+            return self.search_help(node.left,find_val) or self.search_help(node.right,find_val)
 
 # Set up tree
 tree = BST(4)
@@ -64,5 +88,6 @@ tree.insert(5)
 # Check search
 # Should be True
 print tree.search(4)
-# Should be False
+# Should be Fals
 print tree.search(6)
+print tree.search(7)
